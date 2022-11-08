@@ -1,0 +1,19 @@
+{
+  "name": "node-hw-01",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://AlexandrRembeza.github.io/Node-hw-01/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "author": "Alexander Rembeza <srsrembeza10@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "colors": "^1.4.0",
+    "commander": "^9.4.1",
+    "nodemon": "^2.0.20"
+  }
+}
