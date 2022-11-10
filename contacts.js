@@ -1,29 +1,29 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 require('colors');
 
 const contactsPath = path.resolve('./db/contacts.json');
 
-function listContacts() {
-  return JSON.parse(fs.readFileSync(contactsPath, 'utf8'));
+async function listContacts() {
+  return JSON.parse(await fs.readFile(contactsPath, 'utf8'));
 }
 
-function getContactById(contactId) {
-  return JSON.parse(fs.readFileSync(contactsPath, 'utf8')).find(({ id }) => id === contactId);
+async function getContactById(contactId) {
+  return JSON.parse(await fs.readFile(contactsPath, 'utf8')).find(({ id }) => id === contactId);
 }
 
-function removeContact(contactId) {
-  const contacts = JSON.parse(fs.readFileSync(contactsPath, 'utf8')).filter(
+async function removeContact(contactId) {
+  const contacts = JSON.parse(await fs.readFile(contactsPath, 'utf8')).filter(
     ({ id }) => id !== contactId
   );
-  fs.writeFileSync(contactsPath, JSON.stringify(contacts));
+  await fs.writeFile(contactsPath, JSON.stringify(contacts));
 }
 
-function addContact(name, email, phone) {
+async function addContact(name, email, phone) {
   if (name && email && phone) {
-    const contacts = JSON.parse(fs.readFileSync(contactsPath, 'utf8'));
+    const contacts = JSON.parse(await fs.readFile(contactsPath, 'utf8'));
     contacts.push({ id: `${Number(contacts[contacts.length - 1].id) + 1}`, name, email, phone });
-    fs.writeFileSync(contactsPath, JSON.stringify(contacts));
+    await fs.writeFile(contactsPath, JSON.stringify(contacts));
     return;
   }
   return console.log("Don't have all data".red);
